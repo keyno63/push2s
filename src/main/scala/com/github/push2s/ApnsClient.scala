@@ -7,7 +7,7 @@ import io.netty.channel.EventLoopGroup
 import io.netty.handler.codec.http2.Http2FrameLogger
 import io.netty.handler.ssl._
 
-class ApnsClient(apnsServerAddress: InetSocketAddress, sslContext: SslContext
+protected class ApnsClient(apnsServerAddress: InetSocketAddress, sslContext: SslContext
                  , signingKey: ApnsSigningKey, connectTimeoutMillis: Int
                  , idlePingIntervalMillis: Long, gracefulShutdownTimeoutMillis: Long
                  , concurrentConnections: Int, metricsListener: ApnsClientMetricsListener
