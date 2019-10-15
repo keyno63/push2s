@@ -7,6 +7,7 @@ import io.netty.channel.EventLoopGroup
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.handler.codec.http2.Http2FrameLogger
 import io.netty.handler.ssl._
+import io.netty.util.concurrent.{Future, GlobalEventExecutor, SucceededFuture}
 
 protected class ApnsClient(apnsServerAddress: InetSocketAddress, sslContext: SslContext
                  , signingKey: ApnsSigningKey, connectTimeoutMillis: Int
@@ -34,6 +35,17 @@ protected class ApnsClient(apnsServerAddress: InetSocketAddress, sslContext: Ssl
       metricsListener.handleConnectionRemoved(apnsClient = ApnsClient.this)
     override def handleConnectionCreationFailed(): Unit =
       metricsListener.handleConnectionCreationFailed(apnsClient = ApnsClient.this)
+  }
+
+  // method
+  def sendNotification[T <: ApnsPushNotification] (notification: T): PushNotificationFuture[T, PushNotificationResponse[T]] = {
+    var responseFuture = null
+    responseFuture
+  }
+
+  def close() : Future[Void] = {
+    val closeFuture: Future[Void] = new SucceededFuture[Void](GlobalEventExecutor.INSTANCE, null)
+    closeFuture
   }
 
 }
